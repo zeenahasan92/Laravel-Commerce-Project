@@ -1,8 +1,11 @@
 <h1>Restful API For Simple</h1>
 
 <h3>GET PRODUCTS</h3>
+
 `GET` [api/v1/products](http://m1991a.com/api/v1/products/)
-####Response:
+
+<h4>Response : </h4>
+
 ```
 {
     "products": [
@@ -165,10 +168,13 @@
     ]
 }
 ```
----
+
 <h3>GET PRODUCT</h3>
+
 `GET` [api/v1/products/get/:id](http://m1991a.com/api/v1/products/get/2)
-####Response:
+
+<h4>Response : </h4>
+
 ```
 {
     "product": {
@@ -184,10 +190,13 @@
     }
 }
 ```
----	
+
 <h3>SEARCH BY NAME</h3>
+
 `POST` [api/v1/products/search/name](http://m1991a.com/api/v1/products/search/name/)
-####Response:
+
+<h4>Response : </h4>
+
 ```
 {
     "products": [
@@ -206,10 +215,13 @@
     "search": "iphone 4"
 }
 ```
----	
+
 <h3>SEARCH BY PRICE</h3>
+
 `POST` [api/v1/products/search/price](http://m1991a.com/api/v1/products/search/price/)
-####Response:
+
+<h4>Response : </h4>
+
 ```
 {
     "products": [
@@ -240,49 +252,58 @@
     "searchMax": "150"
 }
 ```
----	
+
 <h3>USER LOGIN</h3>
+
 `POST` [api/v1/user/login](http://m1991a.com/api/v1/user/login)
-####Response:
-```
-{
-    "user": {
-        "id": 1,
-        "name": "Sagad Salem",
-        "email": "sagadsalem@yahoo.com",
-        "avatar": "7gzRK3Ny8vfFWFoPWT0F.png",
-        "created_at": "2017-08-19 07:29:59",
-        "updated_at": "2017-08-19 07:29:59",
-        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hcGkvdjEvdXNlci9sb2dpbiIsImlhdCI6MTUwMzE0NDM3NSwiZXhwIjoxNTM0MjQ4Mzc1LCJuYmYiOjE1MDMxNDQzNzUsImp0aSI6InNWQmhHMDdqczhIeUhwcmwifQ.NCefuNNT5TsaGPM7ScUkatPjFi2PbogHPE6GCeqmsj0"
-    }
-}
-```
----	
-<h3>USER REGISTER</h3>
-`POST` [api/v1/user/register](http://m1991a.com/api/v1/user/register)
-####Response:
-```
-{
-    "user": {
-        "id": 1,
-        "name": "Sagad Salem",
-        "email": "sagadsalem@yahoo.com",
-        "avatar": "7gzRK3Ny8vfFWFoPWT0F.png",
-        "created_at": "2017-08-19 07:29:59",
-        "updated_at": "2017-08-19 07:29:59",
-        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hcGkvdjEvdXNlci9sb2dpbiIsImlhdCI6MTUwMzE0NDM3NSwiZXhwIjoxNTM0MjQ4Mzc1LCJuYmYiOjE1MDMxNDQzNzUsImp0aSI6InNWQmhHMDdqczhIeUhwcmwifQ.NCefuNNT5TsaGPM7ScUkatPjFi2PbogHPE6GCeqmsj0"
-    }
-}
-```
----	
-<h3>PLACE ORDER</h3>
-`POST` [api/v1/cart/send](http://m1991a.com/api/v1/send)
+
 <h4>Response : </h4>
-``````
+
+```
+{
+    "user": {
+        "id": 1,
+        "name": "Sagad Salem",
+        "email": "sagadsalem@yahoo.com",
+        "avatar": "7gzRK3Ny8vfFWFoPWT0F.png",
+        "created_at": "2017-08-19 07:29:59",
+        "updated_at": "2017-08-19 07:29:59",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hcGkvdjEvdXNlci9sb2dpbiIsImlhdCI6MTUwMzE0NDM3NSwiZXhwIjoxNTM0MjQ4Mzc1LCJuYmYiOjE1MDMxNDQzNzUsImp0aSI6InNWQmhHMDdqczhIeUhwcmwifQ.NCefuNNT5TsaGPM7ScUkatPjFi2PbogHPE6GCeqmsj0"
+    }
+}
+```
+
+<h3>USER REGISTER</h3>
+
+`POST` [api/v1/user/register](http://m1991a.com/api/v1/user/register)
+
+<h4>Response : </h4>
+
+```
+{
+    "user": {
+        "id": 1,
+        "name": "Sagad Salem",
+        "email": "sagadsalem@yahoo.com",
+        "avatar": "7gzRK3Ny8vfFWFoPWT0F.png",
+        "created_at": "2017-08-19 07:29:59",
+        "updated_at": "2017-08-19 07:29:59",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hcGkvdjEvdXNlci9sb2dpbiIsImlhdCI6MTUwMzE0NDM3NSwiZXhwIjoxNTM0MjQ4Mzc1LCJuYmYiOjE1MDMxNDQzNzUsImp0aSI6InNWQmhHMDdqczhIeUhwcmwifQ.NCefuNNT5TsaGPM7ScUkatPjFi2PbogHPE6GCeqmsj0"
+    }
+}
+```
+
+<h3>PLACE ORDER</h3>
+
+`POST` [api/v1/cart/send](http://m1991a.com/api/v1/send)
+
+<h4>Response : </h4>
+
+```
 {
     "success": [
         "Your Order Send Successfully!!"
     ]
 }
-``````
----	
+```
+
