@@ -1,8 +1,7 @@
-#Restful API For Simple
+<h1>Restful API For Simple</h1>
 
-###GET PRODUCTS
-#####Method: **GET**
-[Link : /api/v1/products/](http://m1991a.com/api/v1/products/)
+<h3>GET PRODUCTS</h3>
+`GET` [api/v1/products](http://m1991a.com/api/v1/products/)
 ####Response:
 ```
 {
@@ -167,9 +166,9 @@
 }
 ```
 ---	
-###GET SINGLE PRODUCT
-#####Method: **GET**
-[Link : /api/v1/products/get/2](http://m1991a.com/api/v1/products/get/2)
+
+<h3>GET PRODUCT</h3>
+`GET` [api/v1/products/get/:id](http://m1991a.com/api/v1/products/get/2)
 ####Response:
 ```
 {
@@ -187,9 +186,8 @@
 }
 ```
 ---	
-###SEARCH BY NAME
-#####Method: **POST**
-[Link : /api/v1/products/search/name/](http://m1991a.com/api/v1/products/search/name/)
+<h3>SEARCH BY NAME</h3>
+`POST` [api/v1/products/search/name](http://m1991a.com/api/v1/products/search/name/)
 ####Response:
 ```
 {
@@ -210,9 +208,9 @@
 }
 ```
 ---	
-###SEARCH BY PRICE
-#####Method: **POST**
-[Link : /api/v1/products/search/price/](http://m1991a.com/api/v1/products/search/price/)
+
+<h3>SEARCH BY PRICE</h3>
+`POST` [api/v1/products/search/price](http://m1991a.com/api/v1/products/search/price/)
 ####Response:
 ```
 {
@@ -244,9 +242,9 @@
     "searchMax": "150"
 }
 ```
-###USER LOGIN
-#####Method: **POST**
-[Link : /api/v1/user/login](http://m1991a.com/api/v1/user/login)
+
+<h3>USER LOGIN</h3>
+`POST` [api/v1/user/login](http://m1991a.com/api/v1/user/login)
 ####Response:
 ```
 {
@@ -261,9 +259,8 @@
     }
 }
 ```
-###USER REGISTER
-#####Method: **POST**
-[Link : /api/v1/user/register](http://m1991a.com/api/v1/user/register)
+<h3>USER REGISTER</h3>
+`POST` [api/v1/user/register](http://m1991a.com/api/v1/user/register)
 ####Response:
 ```
 {
@@ -278,11 +275,8 @@
     }
 }
 ```
-
-
-###PLACE ORDER
-#####Method: **POST**
-[Link : /api/v1/cart/send](http://m1991a.com/api/v1/send)
+<h3>PLACE ORDER</h3>
+`POST` [api/v1/cart/send](http://m1991a.com/api/v1/send)
 ####Response:
 ```
 {
