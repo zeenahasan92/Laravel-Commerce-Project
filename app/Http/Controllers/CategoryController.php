@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers;
 
+//--------------------------------------------------------------------------
+// CategoryController For CRUD Operations on Category Model
+//--------------------------------------------------------------------------
+
 use App\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    //View Category With Pagination = 5
     public function getAll(){
 
-        $categories = Category::paginate(5);
+        $categories = Category::orderByDesc('id')->paginate(5);
 
-        return view('categories.all',compact('categories'));
+        return view('admin.categories.all',compact('categories'));
     }
 
+    //Add Category to Category Model
     public function addCategory(Request $request)
     {
         $category = new Category();
@@ -22,41 +28,44 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect('/categories');
+        return redirect('admin/categories');
     }
 
+    //Delete Category View (GET)
     public function deleteCategoryGet(Category $category)
     {
-        return view('categories.delete',compact('category'));
+        return view('admin.categories.delete',compact('category'));
     }
 
+    //Delete Category From DB (POST)
     public function deleteCategoryPost(Category $category)
     {
         $category->delete();
 
-        return redirect('/categories');
+        return redirect('admin/categories');
     }
 
+    //Update Category View (GET)
     public function updateCategoryGet(Category $category)
     {
-        return view('categories.update',compact('category'));
+        return view('admin.categories.update',compact('category'));
     }
 
+    //Update Category (POST)
     public function updateCategoryPost(Request $request , Category $category)
     {
         $category->name = $request->name;
 
         $category->update();
 
-        return redirect('/categories');
+        return redirect('admin/categories');
     }
 
+    //Get Category Products
     public function categoriesProducts(Category $category)
     {
-        $products = $category->products()->get();
+        $products = $category->products()->orderBy('id','DESC')->get();
 
-        //return $category->first()->name;
-
-        return view('categories.view',compact('products'));
+        return view('admin.categories.view',compact('products'));
     }
 }

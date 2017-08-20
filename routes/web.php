@@ -1,93 +1,137 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
+//----------------------------------------------------------------------------
+Route::get('/', 'FrontController@index');
+//----------------------------------------------------------------------------
 Auth::routes();
+//----------------------------------------------------------------------------
+Route::get('/products/json', 'FrontController@getProducts');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/products/auto', 'FrontController@autoComplete');
 
-/*
-|--------------------------------------------------------------------------
-| CategoryController(add,delete,update,Select)
-|--------------------------------------------------------------------------
-*/
+Route::get('/product/view/{product}', 'FrontController@getProduct');
+//----------------------------------------------------------------------------
+Route::get('/search/name', 'FrontController@searchByName');
 
-Route::get('/categories','CategoryController@getAll');
+Route::get('/search/price', 'FrontController@searchByPrice');
+//----------------------------------------------------------------------------
+Route::group(['middleware' => 'auth'],function (){
 
-Route::get('/categories/{category}','CategoryController@categoriesProducts');
+    Route::get('/logout', 'FrontController@logout');
 
-Route::post('/categories/add','CategoryController@addCategory');
+    Route::get('/home', 'FrontController@goToHome')->name('home');
+});
+//----------------------------------------------------------------------------
+Route::group(['prefix' => 'cart', 'middleware' => 'auth'], function () {
 
-Route::get('/categories/delete/{category}','CategoryController@deleteCategoryGet');
+    /*
+    |--------------------------------------------------------------------------
+    | FrontController - Cart (get,placeOrder,addToCart,deleteFromCart)
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/', 'FrontController@getCart');
 
-Route::post('/categories/delete/{category}','CategoryController@deleteCategoryPost');
+    Route::post('send', 'FrontController@placeOrder')->name('placeOrder');
 
-Route::get('/categories/update/{category}','CategoryController@updateCategoryGet');
+    Route::get('add/{product}', 'FrontController@addToCart');
 
-Route::post('/categories/update/{category}','CategoryController@updateCategoryPost');
+    Route::get('delete/{id}', 'FrontController@deleteFromCart');
+});
+//----------------------------------------------------------------------------
+Route::group(['prefix' => 'admin', 'middleware' => 'admin.middleware'], function () {
 
-/*
-|--------------------------------------------------------------------------
-| ProductController(add,delete,update,Select)
-|--------------------------------------------------------------------------
-*/
+    /*
+    |--------------------------------------------------------------------------
+    | CategoryController(add,delete,update,Select)
+    |--------------------------------------------------------------------------
+    */
+    Route::group(['prefix' => 'categories'], function () {
 
-Route::get('/products','ProductController@getAll');
+        Route::get('/', 'CategoryController@getAll');
 
-Route::get('/products/add','ProductController@addProductGet');
+        Route::get('{category}', 'CategoryController@categoriesProducts');
 
-Route::post('/products/add','ProductController@addProductPost');
+        Route::post('add', 'CategoryController@addCategory');
 
-Route::get('/products/delete/{product}','ProductController@deleteProductGet');
+        Route::get('delete/{category}', 'CategoryController@deleteCategoryGet');
 
-Route::post('/products/delete/{product}','ProductController@deleteProductPost');
+        Route::post('delete/{category}', 'CategoryController@deleteCategoryPost');
 
-Route::get('/products/update/{product}','ProductController@updateProductGet');
+        Route::get('update/{category}', 'CategoryController@updateCategoryGet');
 
-Route::post('/products/update/{product}','ProductController@updateProductPost');
-
-Route::get('/products/{product}','ProductController@viewProduct');
-
-/*
-|--------------------------------------------------------------------------
-| CategoryController(add,delete,update,Select)
-|--------------------------------------------------------------------------
-*/
-
-Route::group(['middleware'=>'admin.middleware'],function (){
-
-    Route::get('/admin/dashboard',function (){
-        return "Authenticated";
+        Route::post('update/{category}', 'CategoryController@updateCategoryPost');
     });
 
-    Route::get('/admin/get_admin','AdminController@getAdmin');
+    /*
+    |--------------------------------------------------------------------------
+    | ProductController(add,delete,update,Select)
+    |--------------------------------------------------------------------------
+     */
+    Route::group(['prefix' => 'products'], function () {
 
-    Route::get('/admin/logout','AdminController@logout');
+        Route::get('/', 'ProductController@getAll');
+
+        Route::get('add', 'ProductController@addProductGet');
+
+        Route::post('add', 'ProductController@addProductPost');
+
+        Route::get('delete/{product}', 'ProductController@deleteProductGet');
+
+        Route::post('delete/{product}', 'ProductController@deleteProductPost');
+
+        Route::get('update/{product}', 'ProductController@updateProductGet');
+
+        Route::post('update/{product}', 'ProductController@updateProductPost');
+
+        Route::get('{product}', 'ProductController@viewProduct');
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | AdminController-Users(delete,Select)
+    |--------------------------------------------------------------------------
+    */
+    Route::group(['prefix' => 'users'], function () {
+
+        Route::get('/', 'AdminController@getUsers');
+
+        Route::get('{user}', 'AdminController@viewUser');
+
+        Route::get('delete/{user}', 'AdminController@deleteUserGet');
+
+        Route::post('delete/{user}', 'AdminController@deleteUserPost');
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | AdminController-Orders(delete,Select)
+    |--------------------------------------------------------------------------
+    */
+    Route::group(['prefix' => 'orders'], function () {
+
+        Route::get('/', 'OrderController@getOrders');
+
+        Route::get('{id}', 'OrderController@getUserOrder');
+
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | AdminController-Admin
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/', 'AdminController@index');
+
+    Route::get('logout', 'AdminController@logout');
+
 });
+//----------------------------------------------------------------------------
+Route::group(['prefix' => 'admin', 'middleware' => 'admin.authenticated'], function () {
 
+    Route::get('login', 'AdminController@getLogin');
 
+    Route::post('login/post', 'AdminController@postLogin')->name('admin.login');
 
+    Route::get('register', 'AdminController@getRegister');
 
-Route::group(['middleware'=>'admin.authenticated'],function (){
-
-    Route::get('/admin/login','AdminController@getLogin');
-
-    Route::post('/admin/login/post','AdminController@postLogin')->name('admin.login');
-
-    Route::get('/admin/register','AdminController@getRegister');
-
-    Route::post('/admin/register/post','AdminController@postRegister')->name('admin.register');
+    Route::post('register/post', 'AdminController@postRegister')->name('admin.register');
 });
