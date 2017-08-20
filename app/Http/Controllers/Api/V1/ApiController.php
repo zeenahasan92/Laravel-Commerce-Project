@@ -24,11 +24,13 @@ class ApiController extends Controller
     //Login Method For User
     public function login(Request $request)
     {
+        //input validation
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|exists:users',
             'password' => 'required'
         ]);
 
+        //return the errors if it exist
         if ($validator->fails())
             return response()->json([
                     'errors' => $validator->errors()->all()]
@@ -46,7 +48,9 @@ class ApiController extends Controller
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
+        //return the user form the token
         $user = JWTAuth::toUser($token);
+        //put token with user object
         $user->token = $token;
 
         // all good so return the user info
@@ -57,6 +61,7 @@ class ApiController extends Controller
     public function register(Request $request)
     {
 
+        //input validation
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
@@ -65,6 +70,7 @@ class ApiController extends Controller
             'avatar' => 'image'
         ]);
 
+        //return the errors if it exist
         if ($validator->fails())
             return response()->json([
                     'errors' => $validator->errors()->all()]
@@ -119,7 +125,6 @@ class ApiController extends Controller
     public function getProduct($id)
     {
         $product = Product::find($id);
-
         return response()->json(['product' => $product]);
     }
 
@@ -139,7 +144,9 @@ class ApiController extends Controller
     //Search By Product Price and Return the Result and The Request
     public function searchByPrice(Request $request)
     {
+        //min value
         $search = $request->search;
+        //max value
         $searchMax = $request->searchMax;
 
         $products = Product::where('price', '>=', "$search")
@@ -159,11 +166,15 @@ class ApiController extends Controller
     // and the Authenticated UserId
     public function placeOrder(Request $request)
     {
+        //Get the user from token that in header
         $user_id = JWTAuth::toUser($request->header('Auth'))->id;
 
+        //the ids of products the the app send it
         $product_ids = $request->ids;
 
+
         $data = [];
+        //put all data in form (user_id,product_id)
         foreach ($product_ids as $product_id) {
             $data[] = [
                 'user_id' => $user_id,
@@ -171,7 +182,10 @@ class ApiController extends Controller
             ];
         }
 
+
+        //insert data
         Order::insert($data);
+        //empty cart
         Cart::destroy();
 
         return response()

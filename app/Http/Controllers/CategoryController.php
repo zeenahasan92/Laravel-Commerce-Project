@@ -64,6 +64,7 @@ class CategoryController extends Controller
     //Get Category Products
     public function categoriesProducts(Category $category)
     {
+        //get all products for this category object
         $products = $category->products()->orderBy('id','DESC')->get();
 
         return view('admin.categories.view',compact('products'));
