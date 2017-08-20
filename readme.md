@@ -165,8 +165,7 @@
     ]
 }
 ```
----	
-
+---
 <h3>GET PRODUCT</h3>
 `GET` [api/v1/products/get/:id](http://m1991a.com/api/v1/products/get/2)
 ####Response:
@@ -208,7 +207,6 @@
 }
 ```
 ---	
-
 <h3>SEARCH BY PRICE</h3>
 `POST` [api/v1/products/search/price](http://m1991a.com/api/v1/products/search/price/)
 ####Response:
@@ -242,7 +240,7 @@
     "searchMax": "150"
 }
 ```
-
+---	
 <h3>USER LOGIN</h3>
 `POST` [api/v1/user/login](http://m1991a.com/api/v1/user/login)
 ####Response:
@@ -259,6 +257,7 @@
     }
 }
 ```
+---	
 <h3>USER REGISTER</h3>
 `POST` [api/v1/user/register](http://m1991a.com/api/v1/user/register)
 ####Response:
@@ -275,6 +274,7 @@
     }
 }
 ```
+---	
 <h3>PLACE ORDER</h3>
 `POST` [api/v1/cart/send](http://m1991a.com/api/v1/send)
 <h4>Response : </h4>
@@ -285,3 +285,4 @@
     ]
 }
 ``````
+---	
